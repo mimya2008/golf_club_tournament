@@ -5,7 +5,6 @@ import java.time.LocalDate;
 import java.util.List;
 
 public interface TournamentRepository extends JpaRepository<Tournament, Long> {
-    List<Tournament> findByLocationContainingIgnoreCase(String location);
+    List<Tournament> findByLocation(String location);
     List<Tournament> findByStartDate(LocalDate startDate);
 }
-

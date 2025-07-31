@@ -37,4 +37,3 @@ public class TournamentController {
         return service.addMember(tournamentId, memberId);
     }
 }
-

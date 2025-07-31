@@ -13,6 +13,7 @@ public class Tournament {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String name;
     private LocalDate startDate;
     private LocalDate endDate;
     private String location;
@@ -27,10 +28,28 @@ public class Tournament {
     )
     private Set<Member> members;
 
-    // No-arg constructor
+    // No-arg constructor for JPA
     public Tournament() {}
 
-    // Getters and setters
+    // Existing constructor for simple cases
+    public Tournament(String name, LocalDate startDate) {
+        this.name = name;
+        this.startDate = startDate;
+    }
+
+    // New full constructor for tests and other use cases
+    public Tournament(String name, LocalDate startDate, LocalDate endDate,
+                      String location, Double entryFee, Double cashPrize) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.location = location;
+        this.entryFee = entryFee;
+        this.cashPrize = cashPrize;
+    }
+
+    // Getters and setters below
+
     public Long getId() {
         return id;
     }
@@ -85,5 +104,13 @@ public class Tournament {
 
     public void setMembers(Set<Member> members) {
         this.members = members;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
