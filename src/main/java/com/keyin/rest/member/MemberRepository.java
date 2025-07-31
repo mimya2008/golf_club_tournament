@@ -5,7 +5,5 @@ import java.util.List;
 
 public interface MemberRepository extends JpaRepository<Member, Long> {
     List<Member> findByNameContainingIgnoreCase(String name);
-    List<Member> findByPhone(String phone);
-    List<Member> findByStartDate(String startDate);
+    List<Member> findByPhoneContaining(String phone);
 }
-

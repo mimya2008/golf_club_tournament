@@ -1,35 +1,42 @@
 package com.keyin.rest.member;
 
 import org.springframework.stereotype.Service;
+
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class MemberService {
-    private final MemberRepository repo;
 
-    public MemberService(MemberRepository repo) {
-        this.repo = repo;
+    private final MemberRepository memberRepository;
+
+    public MemberService(MemberRepository memberRepository) {
+        this.memberRepository = memberRepository;
     }
 
     public Member save(Member member) {
-        return repo.save(member);
+        return memberRepository.save(member);
     }
+
+    public List<Member> getAllMembers() {
+        return memberRepository.findAll();
+    }
+
+    public Member getMemberById(Long id) {
+        return memberRepository.findById(id).orElse(null);
+    }
+
 
     public List<Member> findAll() {
-        return repo.findAll();
-    }
-
-    public Optional<Member> findById(Long id) {
-        return repo.findById(id);
+        return memberRepository.findAll();
     }
 
     public List<Member> searchByName(String name) {
-        return repo.findByNameContainingIgnoreCase(name);
+        // Assuming you have a method in your repository to search by name
+        return memberRepository.findByNameContainingIgnoreCase(name);
     }
 
     public List<Member> searchByPhone(String phone) {
-        return repo.findByPhone(phone);
+        // Assuming you have a method in your repository to search by phone
+        return memberRepository.findByPhoneContaining(phone);
     }
 }
-
