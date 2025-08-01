@@ -2,6 +2,7 @@ package com.keyin.rest.tournament;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import com.keyin.rest.member.Member;
 
@@ -13,6 +14,7 @@ public class Tournament {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "game_name")
     private String name;
     private LocalDate startDate;
     private LocalDate endDate;
@@ -26,7 +28,7 @@ public class Tournament {
             joinColumns = @JoinColumn(name = "tournament_id"),
             inverseJoinColumns = @JoinColumn(name = "member_id")
     )
-    private Set<Member> members;
+    private Set<Member> members = new HashSet<>();
 
     // No-arg constructor for JPA
     public Tournament() {}

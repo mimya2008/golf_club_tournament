@@ -40,15 +40,16 @@ public class TournamentService {
     }
 
     public Tournament addMember(Long tournamentId, Long memberId) {
-        Optional<Tournament> tournamentOpt = tournamentRepository.findById(tournamentId);
-        Optional<Member> memberOpt = memberRepository.findById(memberId);
+        Tournament tournament = tournamentRepository.findById(tournamentId)
+                .orElseThrow(() -> new RuntimeException("Tournament not found"));
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("Member not found"));
 
-        if (tournamentOpt.isPresent() && memberOpt.isPresent()) {
-            Tournament tournament = tournamentOpt.get();
-            Member member = memberOpt.get();
-            tournament.getMembers().add(member);
-            return tournamentRepository.save(tournament);
-        }
-        throw new RuntimeException("Tournament or Member not found");
+        tournament.getMembers().add(member);
+        member.getTournaments().add(tournament); // ✅ Important for bidirectional mapping
+
+        memberRepository.save(member);           // ✅ Save both sides
+        return tournamentRepository.save(tournament);
     }
+
 }

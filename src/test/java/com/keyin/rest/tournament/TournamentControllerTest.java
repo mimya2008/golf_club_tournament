@@ -11,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class TournamentControllerTest {
 
     private final TournamentService tournamentService = Mockito.mock(TournamentService.class);
-    private final TournamentController tournamentController = new TournamentController(tournamentService);
+    private final TournamentRepository tournamentRepository = Mockito.mock(TournamentRepository.class);
+    private final TournamentController tournamentController = new TournamentController(tournamentService, tournamentRepository);
 
     @Test
     void testGetAllTournaments() {

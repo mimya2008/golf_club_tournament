@@ -2,6 +2,7 @@ package com.keyin.rest.member;
 
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -39,4 +40,9 @@ public class MemberService {
         // Assuming you have a method in your repository to search by phone
         return memberRepository.findByPhoneContaining(phone);
     }
+
+    public List<Member> findByTournamentStartDate(LocalDate date) {
+        return memberRepository.findByTournamentStartDate(date);
+    }
+
 }

@@ -2,6 +2,7 @@ package com.keyin.rest.member;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 import com.keyin.rest.tournament.Tournament;
 
@@ -19,7 +20,7 @@ public class Member {
     private int durationInMonths;
 
     @ManyToMany(mappedBy = "members")
-    private Set<Tournament> tournaments;
+    private Set<Tournament> tournaments = new HashSet<>();
 
     // No-arg constructor
     public Member() {}
